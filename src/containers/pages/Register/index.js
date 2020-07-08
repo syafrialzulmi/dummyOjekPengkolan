@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image } from 'react-native';
 import { Input, Button } from '../../../component/atoms';
 import { colors } from '../../../utils';
@@ -11,7 +11,11 @@ const Register = () => {
     // [] => Array
     // '' => String
     // 1 => Number
-    const globalState = useSelector(state => state)
+    const RegisterReducer = useSelector(state => state.RegisterReducer)
+
+    // useEffect(() => {
+    //     console.log('global: ', RegisterReducer.title)
+    // }, [RegisterReducer])
 
     const [form, setForm] = useState({
         fullName: '',
@@ -36,7 +40,7 @@ const Register = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <IconBack width={40} height={40} />
                 <Image source={RegisterImage} style={{width: 284, height: 190, marginBottom: 20}} />
-    <Text style={{fontSize: 16, fontWeight: 'bold', color: colors.textDefault, marginTop: 15, maxWidth: 250}}>Mohon mengisi beberapa data untuk proses daftar anda {globalState.name}</Text>
+    <Text style={{fontSize: 16, fontWeight: 'bold', color: colors.textDefault, marginTop: 15, maxWidth: 250}}>Mohon mengisi beberapa data untuk proses daftar anda {RegisterReducer.title}</Text>
                 <View style={styles.space(30)} />
                 <Input placeholder="Nama Lengkap" value={form.fullName} onChangeText={value => onInputChange(value, 'fullName')} />
                 <View style={styles.space(20)} />
